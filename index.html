@@ -5,12 +5,12 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="https://github.com/MofiU/mofiu.github.io.git">
+  <link rel="dns-prefetch" href="http://yoursite.com">
   <title></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title">
-<meta property="og:url" content="https://github.com/MofiU/mofiu.github.io.git/index.html">
+<meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title">
@@ -144,6 +144,135 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-rails-active-jobsidekiq" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/24/rails-active-jobsidekiq/">rails active_jobsidekiq</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/24/rails-active-jobsidekiq/" class="archive-article-date">
+  	<time datetime="2017-10-24T06:50:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Sidekiq"><a href="#Sidekiq" class="headerlink" title="Sidekiq"></a>Sidekiq</h1><blockquote>
+<p>Simple, efficient background processing for Ruby.<br>Sidekiq uses threads to handle many jobs at the same time in the same process. It does not require Rails but will integrate tightly with Rails to make background processing dead simple.</p>
+<p>Sidekiq is compatible with Resque. It uses the exact same message format as Resque so it can integrate into an existing Resque processing farm. You can have Sidekiq and Resque run side-by-side at the same time and use the Resque client to enqueue jobs in Redis to be processed by Sidekiq.</p>
+<p>Notice:所有操作必须在OS已安装redis服务器和客户端的前提下进行</p>
+<p>1.加入必需的gem</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">gem &apos;redis&apos; # redis</div><div class="line">gem &apos;redis-namespace&apos; #如果使用了redis的namespace则必须加入这个gem</div><div class="line">gem &apos;sidekiq&apos; # https://github.com/mperham/sidekiq</div><div class="line">gem &apos;sinatra&apos;, require: nil # sidekiq自带的监控页面</div></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>配置sidekiq</li>
+</ol>
+<p>在initializers下新建sidekiq.rb文件，用来初始化Redis和Sidekiq config。 initializers/sidekiq.rb ：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">redis_server = &apos;127.0.0.1&apos; # redis服务器</div><div class="line">redis_port = 6379 # redis端口</div><div class="line">redis_db_num = 0 # redis 数据库序号</div><div class="line">redis_namespace = &apos;highlander22_sidekiq&apos; #命名空间，自定义的</div><div class="line"></div><div class="line">Sidekiq.configure_server do |config|</div><div class="line">  p redis_server  # 这个可以去掉</div><div class="line">  config.redis = &#123; url: &quot;redis://#&#123;redis_server&#125;:#&#123;redis_port&#125;/#&#123;redis_db_num&#125;&quot;, namespace: redis_namespace &#125;</div><div class="line">end</div><div class="line"></div><div class="line">Sidekiq.configure_client do |config|</div><div class="line">  config.redis = &#123; url: &quot;redis://#&#123;redis_server&#125;:#&#123;redis_port&#125;/#&#123;redis_db_num&#125;&quot;, namespace: redis_namespace &#125;</div><div class="line">end</div></pre></td></tr></table></figure>
+<blockquote>
+<p>sidekiq 启动配置文件 config/sidekiq.yml:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">:concurrency: 5 # 并发数</div><div class="line">:pidfile: tmp/pids/sidekiq.pid</div><div class="line">:logfile: ./log/sidekiq.log # 输出的日志地址</div><div class="line">:queues:</div><div class="line">    - default # 写在队列参数中的, 表示让 sidekiq 处理这个 queue</div><div class="line">    - [myqueue, 2] # 使用数组的形式写, 第一个参数为打开的 queue 的名称, 第二个为优先级</div><div class="line"></div><div class="line">development:</div><div class="line">    :concurrency: 5</div><div class="line">staging:</div><div class="line">    :concurrency: 10</div><div class="line">production:</div><div class="line">    :concurrency: 20</div></pre></td></tr></table></figure>
+<blockquote>
+<p>3.rails和OS相关配置</p>
+<p>预设的ActiveJob Adapter是:inline，也就是沒有非同步。我們必编辑config/environments/production.rb切换成改用sidekiq如下:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">config.eager_load_paths += %W( #&#123;config.root&#125;/app/jobs )</div></pre></td></tr></table></figure>
+<blockquote>
+<p>修改路由配置，如果使用自带的监控页面</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">require &apos;sidekiq/web&apos;</div><div class="line">mount Sidekiq::Web =&gt; &apos;/sidekiq&apos;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>启动redis</p>
+</blockquote>
+<p><code>redis start</code></p>
+<blockquote>
+<p>启动sidekiq</p>
+</blockquote>
+<p><code>bundle exec sidekiq</code> 或者 <code>sidekiq</code></p>
+<blockquote>
+<ol>
+<li>建立Worker</li>
+</ol>
+<p>执行<code>rails g job hard_worker</code>产生<code>app/jobs/hard_worker_job.rb</code>文件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># app/jobs/hard_worker_job.rb</div><div class="line">class HardWorkerJob &lt; ActiveJob::Base</div><div class="line">  queue_as :default</div><div class="line"></div><div class="line">  def perform(*args)</div><div class="line">    # Do something later</div><div class="line">  end</div><div class="line">end</div></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>绘制UI example</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;%= form_for :sidekiq_job, url: home_sidekiq_job_path, html: &#123;remote: true, class: &apos;form-horizontal&apos;, style: &apos;margin-top: 100px;&apos;&#125; do |f| %&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;%= f.label :count, &apos;任务条数&apos;, class: &apos;col-sm-2 control-label&apos; %&gt;</div><div class="line">    &lt;div class=&quot;col-md-2&quot;&gt;</div><div class="line">      &lt;%= f.text_field :count, class: &apos;form-control&apos; %&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;%= f.label :delay, &apos;延迟执行(Sec)&apos;, class: &apos;col-sm-2 control-label&apos; %&gt;</div><div class="line">    &lt;div class=&quot;col-md-2&quot;&gt;</div><div class="line">      &lt;%= f.text_field :delay, class: &apos;form-control&apos; %&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;div class=&quot;col-md-2 col-md-offset-2&quot;&gt;</div><div class="line">      &lt;%= f.submit &apos;开始执行&apos;, class: &apos;btn btn-primary&apos; %&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line"></div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;div class=&quot;col-md-2 col-md-offset-2&quot;&gt;</div><div class="line">      &lt;%= link_to &apos;sidekiq后台监控页面&apos;, sidekiq_web_path, class: &apos;btn btn-primary&apos;, target: &apos;_blank&apos; %&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;% end %&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>6.controller example</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class HomeController &lt; ApplicationController</div><div class="line">    def sidekiq_job</div><div class="line">        count = params[:sidekiq_job][:count].present? ? params[:sidekiq_job][:count] : 1</div><div class="line">        count.to_i.times do</div><div class="line">        HardWorkerJob.set(wait: params[:sidekiq_job][:delay].present? ? params[:sidekiq_job][:delay].to_i.seconds : 0.seconds).perform_later(&#123;name: &apos;bobo&apos;&#125;)</div><div class="line">    end</div><div class="line">  end</div><div class="line"> end</div></pre></td></tr></table></figure>
+<blockquote>
+<p>7.sidekiq任务后台</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">2016-10-11T08:51:31.312Z 1566 TID-icqgs HardWorkerJob JID-422af1de0943c9e42f78d935 INFO: start</div><div class="line">2016-10-11T08:51:31.313Z 1566 TID-icq6s HardWorkerJob JID-bbbf1661d67720af7ca93bfe INFO: done: 0.01 sec</div><div class="line">2016-10-11T08:51:31.314Z 1566 TID-tb8ts HardWorkerJob JID-4965925fa4718f899684d673 INFO: done: 0.025 sec</div><div class="line">2016-10-11T08:51:31.318Z 1566 TID-icpxw HardWorkerJob JID-c0c08f88dbd27f787b5d7541 INFO: done: 0.01 sec</div><div class="line">2016-10-11T08:51:31.320Z 1566 TID-icq6s HardWorkerJob JID-9aaf9bb533cd16ad450252d0 INFO: start</div><div class="line">2016-10-11T08:51:31.321Z 1566 TID-icqgs HardWorkerJob JID-422af1de0943c9e42f78d935 INFO: done: 0.008 sec</div><div class="line">2016-10-11T08:51:31.324Z 1566 TID-icpxw HardWorkerJob JID-39f9c2c7cc4658e8df6781d3 INFO: start</div><div class="line">2016-10-11T08:51:31.324Z 1566 TID-tb8ts HardWorkerJob JID-bfa8c5d163330738fec2ab1c INFO: start</div><div class="line">2016-10-11T08:51:31.325Z 1566 TID-icqgs HardWorkerJob JID-ec8412afdc039b15a6ed8261 INFO: start</div><div class="line">2016-10-11T08:51:31.326Z 1566 TID-icq6s HardWorkerJob JID-9aaf9bb533cd16ad450252d0 INFO: done: 0.006 sec</div><div class="line">2016-10-11T08:51:31.331Z 1566 TID-icq6s HardWorkerJob JID-82e342c48725baafe330295c INFO: start</div><div class="line">2016-10-11T08:51:31.333Z 1566 TID-icq6s HardWorkerJob JID-82e342c48725baafe330295c INFO: done: 0.002 sec</div><div class="line">2016-10-11T08:51:31.334Z 1566 TID-icq6s HardWorkerJob JID-679af91cc3d9c7466c1235a6 INFO: start</div><div class="line">2016-10-11T08:51:31.336Z 1566 TID-icqgs HardWorkerJob JID-ec8412afdc039b15a6ed8261 INFO: done: 0.01 sec</div><div class="line">2016-10-11T08:51:31.337Z 1566 TID-icqgs HardWorkerJob JID-4e9bfb4cb5de73981bf3241d INFO: start</div><div class="line">2016-10-11T08:51:31.338Z 1566 TID-tb8ts HardWorkerJob JID-bfa8c5d163330738fec2ab1c INFO: done: 0.014 sec</div><div class="line">2016-10-11T08:51:31.340Z 1566 TID-tb8ts HardWorkerJob JID-f75df49e66886537a58bc23f INFO: start</div><div class="line">2016-10-11T08:51:31.342Z 1566 TID-icqgs HardWorkerJob JID-4e9bfb4cb5de73981bf3241d INFO: done: 0.005 sec</div><div class="line">2016-10-11T08:51:31.343Z 1566 TID-icqgs HardWorkerJob JID-36e7b58515c2cc72b599c1fa INFO: start</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">rails</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/24/rails-active-jobsidekiq/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-rails-g-not-work" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -316,7 +445,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
