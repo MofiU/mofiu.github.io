@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>rails g not work | </title>
+  <title>gitment in hexo | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="I think Spring is misbehaving, and not re-requiring gems correctly. Check spring’s status with bin/spring status. If it’s running, try stopping it with bin/spring stop. If it’s not, check to see if th">
-<meta name="keywords" content="rails">
+  <meta name="description" content="在yilia中加入gitment评论功能">
+<meta name="keywords" content="hexo,git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="rails g not work">
-<meta property="og:url" content="http://yoursite.com/2017/10/23/rails-g-not-work/index.html">
+<meta property="og:title" content="gitment in hexo">
+<meta property="og:url" content="http://yoursite.com/2017/10/25/gitment-in-hexo/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="I think Spring is misbehaving, and not re-requiring gems correctly. Check spring’s status with bin/spring status. If it’s running, try stopping it with bin/spring stop. If it’s not, check to see if th">
-<meta property="og:updated_time" content="2017-10-23T09:40:37.539Z">
+<meta property="og:description" content="在yilia中加入gitment评论功能">
+<meta property="og:updated_time" content="2017-10-25T02:30:58.302Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="rails g not work">
-<meta name="twitter:description" content="I think Spring is misbehaving, and not re-requiring gems correctly. Check spring’s status with bin/spring status. If it’s running, try stopping it with bin/spring stop. If it’s not, check to see if th">
+<meta name="twitter:title" content="gitment in hexo">
+<meta name="twitter:description" content="在yilia中加入gitment评论功能">
   
   
     <link rel="icon" href="/favicon.png">
@@ -148,30 +148,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-rails-g-not-work" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-gitment-in-hexo" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      rails g not work
+      gitment in hexo
     </h1>
   
 
         
-        <a href="/2017/10/23/rails-g-not-work/" class="archive-article-date">
-  	<time datetime="2017-10-23T09:40:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-23</time>
+        <a href="/2017/10/25/gitment-in-hexo/" class="archive-article-date">
+  	<time datetime="2017-10-25T02:23:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>I think Spring is misbehaving, and not re-requiring gems correctly.</p>
-<p>Check spring’s status with bin/spring status. If it’s running, try stopping it with <code>bin/spring stop</code>. If it’s not, check to see if there are any orphan Spring processes that might be screwing things up:</p>
-<p><code>ps aux | grep spring.</code></p>
-<p>I’m not entirely sure why Spring is acting like this, but killing it off fixed the issue for me. I was unable to replicate again to investigate further.</p>
+        <p>在<code>yilia</code>中加入gitment评论功能</p>
+<a id="more"></a>
+<ol>
+<li>注册一个应用<a href="https://github.com/settings/applications/new" target="_blank" rel="external">https://github.com/settings/applications/new</a></li>
+</ol>
+<p>Application name: Blog<br>Homepage URL: <a href="https://mofiu.github.io" target="_blank" rel="external">https://mofiu.github.io</a><br>Application description: 随意<br>Authorization callback URL: <a href="https://mofiu.github.io" target="_blank" rel="external">https://mofiu.github.io</a></p>
+<ol>
+<li><p>获取client id 和client serect</p>
+</li>
+<li><p>填写gitment配置</p>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attr">gitment_owner:</span> <span class="string">MofiU</span>      <span class="comment">#你的 GitHub Name</span></div><div class="line"><span class="attr">gitment_repo:</span> <span class="string">'mofiu.github.io'</span>          <span class="comment">#存储评论的 repo</span></div><div class="line"><span class="attr">gitment_oauth:</span></div><div class="line"><span class="attr">  client_id:</span> <span class="string">xxxxxxxx</span>           <span class="comment">#client ID</span></div><div class="line"><span class="attr">  client_secret:</span> <span class="string">xxxxxxx</span>       <span class="comment">#client secret</span></div></pre></td></tr></table></figure>
+<ol>
+<li><code>hexo generate; hexo deploy</code></li>
+</ol>
 
       
 
@@ -185,7 +197,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">rails</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
         		</li>
       		
 		</ul>
@@ -241,7 +257,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/10/23/rails-g-not-work/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/10/25/gitment-in-hexo/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -255,15 +271,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/10/24/rails-active-jobsidekiq/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          rails active_jobsidekiq
-        
-      </div>
-    </a>
   
+    <a href="/2017/10/24/rails-active-jobsidekiq/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">rails active_jobsidekiq</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -313,7 +325,7 @@
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  id: "http://yoursite.com/2017/10/23/rails-g-not-work/",
+  id: "http://yoursite.com/2017/10/25/gitment-in-hexo/",
   owner: 'MofiU',
   repo: 'mofiu.github.io',
   oauth: {
