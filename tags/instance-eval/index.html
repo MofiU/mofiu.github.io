@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     
-    <title></title>
+    <title>标签: instance_eval | </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta property="og:type" content="website">
 <meta property="og:title">
-<meta property="og:url" content="https://mofiu.github.io/index.html">
+<meta property="og:url" content="https://mofiu.github.io/tags/instance-eval/index.html">
 <meta property="og:site_name">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -181,21 +181,24 @@
 
             
             <section id="main">
-    <article id="post-different-between-instant-eval-and-block" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
+<div class="timeline timeline-wrap">
+    <div class="timeline-row timeline-row-major">
+        <span class="node"><i class="fa fa-tag"></i></span>
+        <h1 class="title">#instance_eval</h1>
+    </div>
+    
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2017/11/01/different-between-instant-eval-and-block/">instant_eval和block的区别</a>
+            <a class="timeline-article-title" href="/2017/11/01/different-between-instant-eval-and-block/">instant_eval和block的区别</a>
         </h1>
     
 
-                
-                    <div class="article-meta">
-                        
+                <div class="article-meta">
+                    
     <div class="article-date">
         <i class="fa fa-calendar"></i>
         <a href="/2017/11/01/different-between-instant-eval-and-block/">
@@ -204,84 +207,23 @@
     </div>
 
 
-                        
+                    
     <div class="article-category">
     	<i class="fa fa-folder"></i>
         <a class="article-category-link" href="/categories/ruby/">ruby</a>
     </div>
 
-                        
+                    
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link" href="/tags/block/">block</a>, <a class="tag-link" href="/tags/instance-eval/">instance_eval</a>, <a class="tag-link" href="/tags/作用域/">作用域</a>
     </div>
 
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line">  <span class="keyword">attr_accessor</span> <span class="symbol">:var</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say_hello</span><span class="params">(&amp;block)</span></span></div><div class="line">    instance_eval(&amp;block)</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say_hello2</span><span class="params">(&amp;block)</span></span></div><div class="line">    block.call</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Test.new.say_hello <span class="keyword">do</span></div><div class="line">  p <span class="keyword">self</span> <span class="comment">#=&gt; main</span></div><div class="line">  @var = <span class="number">100</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Test.new.say_hello2 <span class="keyword">do</span></div><div class="line">  p <span class="keyword">self</span> <span class="comment">#=&gt; #&lt;Test:0x00000002b1e200&gt;</span></div><div class="line">  @var = <span class="number">100</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>结论： block的作用域是main，instant_eval的作用域是instant本身</p>
-</blockquote>
-
-        
+                </div>
+            </div>
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-    <div class="bdsharebuttonbox">
-    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
-    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
-    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
-    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
-    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
-    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
-</div>
-<script>
-window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-<style>
-    .bdshare_popup_box {
-        border-radius: 4px;
-        border: #e1e1e1 solid 1px;
-    }
-    .bdshare-button-style0-16 a,
-    .bdshare-button-style0-16 .bds_more {
-        padding-left: 20px;
-        margin: 6px 10px 6px 0;
-    }
-    .bdshare_dialog_list a,
-    .bdshare_popup_list a,
-    .bdshare_popup_bottom a {
-        font-family: 'Microsoft Yahei';
-    }
-    .bdshare_popup_top {
-        display: none;
-    }
-    .bdshare_popup_bottom {
-        height: auto;
-        padding: 5px;
-    }
-</style>
-
-
-</div>
-
-            
     
-
-        </footer>
-    </div>
-    
-</article>
-
-
+</div>
 </section>
             
                 
