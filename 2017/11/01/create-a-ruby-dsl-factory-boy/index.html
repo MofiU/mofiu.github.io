@@ -3,19 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>About | </title>
+    <title>create a ruby dsl: factory boy | </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="帅是一种生活态度~">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About">
-<meta property="og:url" content="https://mofiu.github.io/about/index.html">
+    <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667require &apos;active_support/core_ext/string&apos;class User  attr_accessor :name, :e">
+<meta name="keywords" content="dsl metaprogram">
+<meta property="og:type" content="article">
+<meta property="og:title" content="create a ruby dsl: factory boy">
+<meta property="og:url" content="https://mofiu.github.io/2017/11/01/create-a-ruby-dsl-factory-boy/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="帅是一种生活态度~">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667require &apos;active_support/core_ext/string&apos;class User  attr_accessor :name, :e">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-25T06:58:11.340Z">
+<meta property="og:updated_time" content="2017-11-01T08:34:23.911Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About">
-<meta name="twitter:description" content="帅是一种生活态度~">
+<meta name="twitter:title" content="create a ruby dsl: factory boy">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667require &apos;active_support/core_ext/string&apos;class User  attr_accessor :name, :e">
     
 
     
@@ -184,7 +185,7 @@
 </aside>
 
             
-            <section id="main"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-create-a-ruby-dsl-factory-boy" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -192,10 +193,34 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            About
+            create a ruby dsl: factory boy
         </h1>
     
 
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/11/01/create-a-ruby-dsl-factory-boy/">
+            <time datetime="2017-11-01T08:24:40.000Z" itemprop="datePublished">2017-11-01</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/ruby/">ruby</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/dsl-metaprogram/">dsl metaprogram</a>
+    </div>
+
+                    </div>
                 
             </header>
         
@@ -203,7 +228,10 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>帅是一种生活态度~</p>
+            <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'active_support/core_ext/string'</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></div><div class="line">  <span class="keyword">attr_accessor</span> <span class="symbol">:name</span>, <span class="symbol">:email</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">FactoryBoy</span></span></div><div class="line">  @registry = &#123;&#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">registry</span></span></div><div class="line">    @registry</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Builder</span></span></div><div class="line">    <span class="keyword">attr_reader</span> <span class="symbol">:attributes</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initialize</span></span></div><div class="line">      @attributes = &#123;&#125;</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">method_missing</span><span class="params">(name, *args, &amp;block)</span></span></div><div class="line">      @attributes[name] = args[<span class="number">0</span>]</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Definition</span></span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factory</span><span class="params">(name, &amp;block)</span></span></div><div class="line">      builder = Builder.new</div><div class="line">      <span class="keyword">if</span> block_given?</div><div class="line">        builder.instance_eval(&amp;block)</div><div class="line">      <span class="keyword">end</span></div><div class="line">      FactoryBoy.registry[name] = builder</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">define</span><span class="params">(&amp;block)</span></span></div><div class="line">    definition = Definition.new</div><div class="line">    definition.instance_eval(&amp;block) <span class="keyword">if</span> block_given?</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">build</span><span class="params">(name, overrides = &#123;&#125;)</span></span></div><div class="line">    raise FactoryNotRegistry, <span class="string">"Factory haven't registry!"</span> <span class="keyword">unless</span> @registry.has_key?(name)</div><div class="line">    instant = FactoryBoy.const_get(name.to_s.classify).new</div><div class="line">    attrs = @registry[name].attributes.merge(overrides)</div><div class="line">    attrs.each <span class="keyword">do</span> <span class="params">|name, value|</span></div><div class="line">      instant.send(<span class="string">"<span class="subst">#&#123;name.to_s&#125;</span>="</span>, value)</div><div class="line">    <span class="keyword">end</span></div><div class="line">    instant</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">FactoryNotRegistry</span> &lt; StandardError;</span> <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">FactoryBoy.define <span class="keyword">do</span></div><div class="line">  factory <span class="symbol">:user</span> <span class="keyword">do</span></div><div class="line">    name <span class="string">'zhangsan'</span></div><div class="line">    email <span class="string">'zhangsan@gmail.com'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">p FactoryBoy.registry <span class="comment">#=&gt; &#123;:user=&gt;#&lt;FactoryBoy::Builder:0x00000003237b40 <span class="doctag">@attributes</span>=&#123;:name=&gt;"zhangsan", :email=&gt;"zhangsan<span class="doctag">@gmail</span>.com"&#125;&gt;&#125;</span></div><div class="line"></div><div class="line">p FactoryBoy.build(<span class="symbol">:user</span>) <span class="comment">#=&gt; #&lt;User:0x00000003237348 <span class="doctag">@name</span>="zhangsan", <span class="doctag">@email</span>="zhangsan<span class="doctag">@gmail</span>.com"&gt;</span></div><div class="line"></div><div class="line">p FactoryBoy.build(<span class="symbol">:user</span>, <span class="symbol">name:</span> <span class="string">'lisi'</span>, <span class="symbol">email:</span> <span class="string">'lisi@gmail.com'</span>) <span class="comment"># =&gt; #&lt;User:0x00000003236e48 <span class="doctag">@name</span>="lisi", <span class="doctag">@email</span>="lisi<span class="doctag">@gmail</span>.com"&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">p FactoryBoy.build(<span class="symbol">:other</span>) <span class="comment">#=&gt; Factory haven't registry! (FactoryBoy::FactoryNotRegistry)</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>关键在于理解instant_eval 和 block的用法</p>
+</blockquote>
 
         
         </div>
@@ -256,6 +284,16 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     </div>
     
         
+<nav id="article-nav">
+    
+    
+        <a href="/2017/11/01/different-between-instant-eval-and-block/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">instant_eval和block的区别</div>
+        </a>
+    
+</nav>
+
 
     
 </article>

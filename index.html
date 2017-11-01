@@ -152,11 +152,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                1
+                2
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                3
+                4
                 <span>标签</span>
             </div>
         </div>
@@ -181,6 +181,108 @@
 
             
             <section id="main">
+    <article id="post-create-a-ruby-dsl-factory-boy" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/11/01/create-a-ruby-dsl-factory-boy/">create a ruby dsl: factory boy</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/11/01/create-a-ruby-dsl-factory-boy/">
+            <time datetime="2017-11-01T08:24:40.000Z" itemprop="datePublished">2017-11-01</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/ruby/">ruby</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/dsl-metaprogram/">dsl metaprogram</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'active_support/core_ext/string'</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></div><div class="line">  <span class="keyword">attr_accessor</span> <span class="symbol">:name</span>, <span class="symbol">:email</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">FactoryBoy</span></span></div><div class="line">  @registry = &#123;&#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">registry</span></span></div><div class="line">    @registry</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Builder</span></span></div><div class="line">    <span class="keyword">attr_reader</span> <span class="symbol">:attributes</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initialize</span></span></div><div class="line">      @attributes = &#123;&#125;</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">method_missing</span><span class="params">(name, *args, &amp;block)</span></span></div><div class="line">      @attributes[name] = args[<span class="number">0</span>]</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Definition</span></span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factory</span><span class="params">(name, &amp;block)</span></span></div><div class="line">      builder = Builder.new</div><div class="line">      <span class="keyword">if</span> block_given?</div><div class="line">        builder.instance_eval(&amp;block)</div><div class="line">      <span class="keyword">end</span></div><div class="line">      FactoryBoy.registry[name] = builder</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">define</span><span class="params">(&amp;block)</span></span></div><div class="line">    definition = Definition.new</div><div class="line">    definition.instance_eval(&amp;block) <span class="keyword">if</span> block_given?</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">build</span><span class="params">(name, overrides = &#123;&#125;)</span></span></div><div class="line">    raise FactoryNotRegistry, <span class="string">"Factory haven't registry!"</span> <span class="keyword">unless</span> @registry.has_key?(name)</div><div class="line">    instant = FactoryBoy.const_get(name.to_s.classify).new</div><div class="line">    attrs = @registry[name].attributes.merge(overrides)</div><div class="line">    attrs.each <span class="keyword">do</span> <span class="params">|name, value|</span></div><div class="line">      instant.send(<span class="string">"<span class="subst">#&#123;name.to_s&#125;</span>="</span>, value)</div><div class="line">    <span class="keyword">end</span></div><div class="line">    instant</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">FactoryNotRegistry</span> &lt; StandardError;</span> <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">FactoryBoy.define <span class="keyword">do</span></div><div class="line">  factory <span class="symbol">:user</span> <span class="keyword">do</span></div><div class="line">    name <span class="string">'zhangsan'</span></div><div class="line">    email <span class="string">'zhangsan@gmail.com'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">p FactoryBoy.registry <span class="comment">#=&gt; &#123;:user=&gt;#&lt;FactoryBoy::Builder:0x00000003237b40 <span class="doctag">@attributes</span>=&#123;:name=&gt;"zhangsan", :email=&gt;"zhangsan<span class="doctag">@gmail</span>.com"&#125;&gt;&#125;</span></div><div class="line"></div><div class="line">p FactoryBoy.build(<span class="symbol">:user</span>) <span class="comment">#=&gt; #&lt;User:0x00000003237348 <span class="doctag">@name</span>="zhangsan", <span class="doctag">@email</span>="zhangsan<span class="doctag">@gmail</span>.com"&gt;</span></div><div class="line"></div><div class="line">p FactoryBoy.build(<span class="symbol">:user</span>, <span class="symbol">name:</span> <span class="string">'lisi'</span>, <span class="symbol">email:</span> <span class="string">'lisi@gmail.com'</span>) <span class="comment"># =&gt; #&lt;User:0x00000003236e48 <span class="doctag">@name</span>="lisi", <span class="doctag">@email</span>="lisi<span class="doctag">@gmail</span>.com"&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">p FactoryBoy.build(<span class="symbol">:other</span>) <span class="comment">#=&gt; Factory haven't registry! (FactoryBoy::FactoryNotRegistry)</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>关键在于理解instant_eval 和 block的用法</p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-different-between-instant-eval-and-block" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -297,6 +399,15 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/ruby/">ruby</a></p>
+                            <p class="item-title"><a href="/2017/11/01/create-a-ruby-dsl-factory-boy/" class="title">create a ruby dsl: factory boy</a></p>
+                            <p class="item-date"><time datetime="2017-11-01T08:24:40.000Z" itemprop="datePublished">2017-11-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/ruby/">ruby</a></p>
                             <p class="item-title"><a href="/2017/11/01/different-between-instant-eval-and-block/" class="title">instant_eval和block的区别</a></p>
                             <p class="item-date"><time datetime="2017-11-01T06:16:01.000Z" itemprop="datePublished">2017-11-01</time></p>
                         </div>
@@ -311,7 +422,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ruby/">ruby</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ruby/">ruby</a><span class="category-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -320,7 +431,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -329,7 +440,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/">block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/instance-eval/">instance_eval</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/">block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dsl-metaprogram/">dsl metaprogram</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/instance-eval/">instance_eval</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -338,7 +449,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/block/" style="font-size: 10px;">block</a> <a href="/tags/instance-eval/" style="font-size: 10px;">instance_eval</a> <a href="/tags/作用域/" style="font-size: 10px;">作用域</a>
+            <a href="/tags/block/" style="font-size: 10px;">block</a> <a href="/tags/dsl-metaprogram/" style="font-size: 10px;">dsl metaprogram</a> <a href="/tags/instance-eval/" style="font-size: 10px;">instance_eval</a> <a href="/tags/作用域/" style="font-size: 10px;">作用域</a>
         </div>
     </div>
 
