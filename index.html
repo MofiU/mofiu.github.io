@@ -152,11 +152,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                3
+                2
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                3
+                1
                 <span>标签</span>
             </div>
         </div>
@@ -181,7 +181,7 @@
 
             
             <section id="main">
-    <article id="post-gitment-in-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-different-between-instant-eval-and-block" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -189,7 +189,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2017/10/25/gitment-in-hexo/">gitment in hexo</a>
+            <a class="article-title" href="/2017/11/01/different-between-instant-eval-and-block/">instant_eval和block的区别</a>
         </h1>
     
 
@@ -198,8 +198,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/10/25/gitment-in-hexo/">
-            <time datetime="2017-10-25T02:23:56.000Z" itemprop="datePublished">2017-10-25</time>
+        <a href="/2017/11/01/different-between-instant-eval-and-block/">
+            <time datetime="2017-11-01T06:16:01.000Z" itemprop="datePublished">2017-11-01</time>
         </a>
     </div>
 
@@ -207,13 +207,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/hexo/">hexo</a>
+        <a class="article-category-link" href="/categories/ruby/">ruby</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/git/">git</a>, <a class="tag-link" href="/tags/hexo/">hexo</a>
+        <a class="tag-link" href="/tags/作用域/">作用域</a>
     </div>
 
                     </div>
@@ -223,10 +223,12 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p>在<code>yilia</code>中加入gitment评论功能</p></p>
-            <p class="article-more-link">
-                <a href="/2017/10/25/gitment-in-hexo/#more">查看更多</a>
-            </p>
+            
+            <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line">  <span class="keyword">attr_accessor</span> <span class="symbol">:var</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say_hello</span><span class="params">(&amp;block)</span></span></div><div class="line">    instance_eval(&amp;block)</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say_hello2</span><span class="params">(&amp;block)</span></span></div><div class="line">    block.call</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Test.new.say_hello <span class="keyword">do</span></div><div class="line">  p <span class="keyword">self</span> <span class="comment">#=&gt; main</span></div><div class="line">  @var = <span class="number">100</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Test.new.say_hello2 <span class="keyword">do</span></div><div class="line">  p <span class="keyword">self</span> <span class="comment">#=&gt; #&lt;Test:0x00000002b1e200&gt;</span></div><div class="line">  @var = <span class="number">100</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>结论： block的作用域是main，instant_eval的作用域是instant本身</p>
+</blockquote>
+
         
         </div>
         <footer class="article-footer">
@@ -281,7 +283,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
 
 
 
-    <article id="post-rails-active-jobsidekiq" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-instant-eval与block" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -289,7 +291,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2017/10/24/rails-active-jobsidekiq/">rails active_jobsidekiq</a>
+            <a class="article-title" href="/2017/11/01/instant-eval与block/">instant_eval与block</a>
         </h1>
     
 
@@ -298,126 +300,14 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/10/24/rails-active-jobsidekiq/">
-            <time datetime="2017-10-24T06:50:23.000Z" itemprop="datePublished">2017-10-24</time>
+        <a href="/2017/11/01/instant-eval与block/">
+            <time datetime="2017-11-01T06:15:07.000Z" itemprop="datePublished">2017-11-01</time>
         </a>
     </div>
 
 
                         
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/后端/">后端</a>
-    </div>
-
                         
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/rails/">rails</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h1 id="Sidekiq"><a href="#Sidekiq" class="headerlink" title="Sidekiq"></a>Sidekiq</h1><blockquote>
-<p>Simple, efficient background processing for Ruby.<br>Sidekiq uses threads to handle many jobs at the same time in the same process. It does not require Rails but will integrate tightly with Rails to make background processing dead simple.</p>
-</blockquote></p>
-            <p class="article-more-link">
-                <a href="/2017/10/24/rails-active-jobsidekiq/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-    <div class="bdsharebuttonbox">
-    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
-    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
-    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
-    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
-    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
-    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
-</div>
-<script>
-window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-<style>
-    .bdshare_popup_box {
-        border-radius: 4px;
-        border: #e1e1e1 solid 1px;
-    }
-    .bdshare-button-style0-16 a,
-    .bdshare-button-style0-16 .bds_more {
-        padding-left: 20px;
-        margin: 6px 10px 6px 0;
-    }
-    .bdshare_dialog_list a,
-    .bdshare_popup_list a,
-    .bdshare_popup_bottom a {
-        font-family: 'Microsoft Yahei';
-    }
-    .bdshare_popup_top {
-        display: none;
-    }
-    .bdshare_popup_bottom {
-        height: auto;
-        padding: 5px;
-    }
-</style>
-
-
-</div>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-rails-g-not-work" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/10/23/rails-g-not-work/">rails g not work</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/10/23/rails-g-not-work/">
-            <time datetime="2017-10-23T09:40:14.000Z" itemprop="datePublished">2017-10-23</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/后端/">后端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/rails/">rails</a>
-    </div>
-
                     </div>
                 
             </header>
@@ -426,11 +316,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>I think Spring is misbehaving, and not re-requiring gems correctly.</p>
-<p>Check spring’s status with bin/spring status. If it’s running, try stopping it with <code>bin/spring stop</code>. If it’s not, check to see if there are any orphan Spring processes that might be screwing things up:</p>
-<p><code>ps aux | grep spring.</code></p>
-<p>I’m not entirely sure why Spring is acting like this, but killing it off fixed the issue for me. I was unable to replicate again to investigate further.</p>
-
+            
         
         </div>
         <footer class="article-footer">
@@ -498,27 +384,18 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
                     <li>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/hexo/">hexo</a></p>
-                            <p class="item-title"><a href="/2017/10/25/gitment-in-hexo/" class="title">gitment in hexo</a></p>
-                            <p class="item-date"><time datetime="2017-10-25T02:23:56.000Z" itemprop="datePublished">2017-10-25</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/ruby/">ruby</a></p>
+                            <p class="item-title"><a href="/2017/11/01/different-between-instant-eval-and-block/" class="title">instant_eval和block的区别</a></p>
+                            <p class="item-date"><time datetime="2017-11-01T06:16:01.000Z" itemprop="datePublished">2017-11-01</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/后端/">后端</a></p>
-                            <p class="item-title"><a href="/2017/10/24/rails-active-jobsidekiq/" class="title">rails active_jobsidekiq</a></p>
-                            <p class="item-date"><time datetime="2017-10-24T06:50:23.000Z" itemprop="datePublished">2017-10-24</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/后端/">后端</a></p>
-                            <p class="item-title"><a href="/2017/10/23/rails-g-not-work/" class="title">rails g not work</a></p>
-                            <p class="item-date"><time datetime="2017-10-23T09:40:14.000Z" itemprop="datePublished">2017-10-23</time></p>
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/11/01/instant-eval与block/" class="title">instant_eval与block</a></p>
+                            <p class="item-date"><time datetime="2017-11-01T06:15:07.000Z" itemprop="datePublished">2017-11-01</time></p>
                         </div>
                     </li>
                 
@@ -531,7 +408,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/">后端</a><span class="category-list-count">2</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ruby/">ruby</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -540,7 +417,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -549,7 +426,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -558,7 +435,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/rails/" style="font-size: 20px;">rails</a>
+            <a href="/tags/作用域/" style="font-size: 10px;">作用域</a>
         </div>
     </div>
 

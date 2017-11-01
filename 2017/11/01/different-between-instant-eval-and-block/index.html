@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>gitment in hexo | </title>
+    <title>instant_eval和block的区别 | </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="在yilia中加入gitment评论功能">
-<meta name="keywords" content="hexo,git">
+    <meta name="description" content="1234567891011121314151617181920class Test  attr_accessor :var  def say_hello(&amp;amp;block)    instance_eval(&amp;amp;block)  end  def say_hello2(&amp;amp;block)    block.call  endendTest.new.say_hello do  p sel">
+<meta name="keywords" content="作用域">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gitment in hexo">
-<meta property="og:url" content="https://mofiu.github.io/2017/10/25/gitment-in-hexo/index.html">
+<meta property="og:title" content="instant_eval和block的区别">
+<meta property="og:url" content="https://mofiu.github.io/2017/11/01/different-between-instant-eval-and-block/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="在yilia中加入gitment评论功能">
+<meta property="og:description" content="1234567891011121314151617181920class Test  attr_accessor :var  def say_hello(&amp;amp;block)    instance_eval(&amp;amp;block)  end  def say_hello2(&amp;amp;block)    block.call  endendTest.new.say_hello do  p sel">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-26T09:25:54.032Z">
+<meta property="og:updated_time" content="2017-11-01T06:25:34.430Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gitment in hexo">
-<meta name="twitter:description" content="在yilia中加入gitment评论功能">
+<meta name="twitter:title" content="instant_eval和block的区别">
+<meta name="twitter:description" content="1234567891011121314151617181920class Test  attr_accessor :var  def say_hello(&amp;amp;block)    instance_eval(&amp;amp;block)  end  def say_hello2(&amp;amp;block)    block.call  endendTest.new.say_hello do  p sel">
     
 
     
@@ -157,11 +157,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                3
+                2
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                3
+                1
                 <span>标签</span>
             </div>
         </div>
@@ -185,7 +185,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-gitment-in-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-different-between-instant-eval-and-block" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -193,7 +193,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            gitment in hexo
+            instant_eval和block的区别
         </h1>
     
 
@@ -202,8 +202,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/10/25/gitment-in-hexo/">
-            <time datetime="2017-10-25T02:23:56.000Z" itemprop="datePublished">2017-10-25</time>
+        <a href="/2017/11/01/different-between-instant-eval-and-block/">
+            <time datetime="2017-11-01T06:16:01.000Z" itemprop="datePublished">2017-11-01</time>
         </a>
     </div>
 
@@ -211,13 +211,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/hexo/">hexo</a>
+        <a class="article-category-link" href="/categories/ruby/">ruby</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/git/">git</a>, <a class="tag-link" href="/tags/hexo/">hexo</a>
+        <a class="tag-link" href="/tags/作用域/">作用域</a>
     </div>
 
                     </div>
@@ -228,22 +228,10 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>在<code>yilia</code>中加入gitment评论功能</p>
-<a id="more"></a>
-<ol>
-<li>注册一个应用<a href="https://github.com/settings/applications/new" target="_blank" rel="external">https://github.com/settings/applications/new</a></li>
-</ol>
-<p>Application name: Blog<br>Homepage URL: <a href="https://mofiu.github.io">https://mofiu.github.io</a><br>Application description: 随意<br>Authorization callback URL: <a href="https://mofiu.github.io">https://mofiu.github.io</a></p>
-<ol>
-<li><p>获取client id 和client serect</p>
-</li>
-<li><p>填写gitment配置</p>
-</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attr">gitment_owner:</span> <span class="string">MofiU</span>      <span class="comment">#你的 GitHub Name</span></div><div class="line"><span class="attr">gitment_repo:</span> <span class="string">'mofiu.github.io'</span>          <span class="comment">#存储评论的 repo</span></div><div class="line"><span class="attr">gitment_oauth:</span></div><div class="line"><span class="attr">  client_id:</span> <span class="string">xxxxxxxx</span>           <span class="comment">#client ID</span></div><div class="line"><span class="attr">  client_secret:</span> <span class="string">xxxxxxx</span>       <span class="comment">#client secret</span></div></pre></td></tr></table></figure>
-<ol>
-<li><code>hexo generate; hexo deploy</code></li>
-</ol>
+            <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line">  <span class="keyword">attr_accessor</span> <span class="symbol">:var</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say_hello</span><span class="params">(&amp;block)</span></span></div><div class="line">    instance_eval(&amp;block)</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say_hello2</span><span class="params">(&amp;block)</span></span></div><div class="line">    block.call</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Test.new.say_hello <span class="keyword">do</span></div><div class="line">  p <span class="keyword">self</span> <span class="comment">#=&gt; main</span></div><div class="line">  @var = <span class="number">100</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Test.new.say_hello2 <span class="keyword">do</span></div><div class="line">  p <span class="keyword">self</span> <span class="comment">#=&gt; #&lt;Test:0x00000002b1e200&gt;</span></div><div class="line">  @var = <span class="number">100</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>结论： block的作用域是main，instant_eval的作用域是instant本身</p>
+</blockquote>
 
         
         </div>
@@ -299,9 +287,9 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
 <nav id="article-nav">
     
     
-        <a href="/2017/10/24/rails-active-jobsidekiq/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/11/01/instant-eval与block/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">rails active_jobsidekiq</div>
+            <div class="article-nav-title">instant_eval与block</div>
         </a>
     
 </nav>
@@ -332,27 +320,18 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
                     <li>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/hexo/">hexo</a></p>
-                            <p class="item-title"><a href="/2017/10/25/gitment-in-hexo/" class="title">gitment in hexo</a></p>
-                            <p class="item-date"><time datetime="2017-10-25T02:23:56.000Z" itemprop="datePublished">2017-10-25</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/ruby/">ruby</a></p>
+                            <p class="item-title"><a href="/2017/11/01/different-between-instant-eval-and-block/" class="title">instant_eval和block的区别</a></p>
+                            <p class="item-date"><time datetime="2017-11-01T06:16:01.000Z" itemprop="datePublished">2017-11-01</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/后端/">后端</a></p>
-                            <p class="item-title"><a href="/2017/10/24/rails-active-jobsidekiq/" class="title">rails active_jobsidekiq</a></p>
-                            <p class="item-date"><time datetime="2017-10-24T06:50:23.000Z" itemprop="datePublished">2017-10-24</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/后端/">后端</a></p>
-                            <p class="item-title"><a href="/2017/10/23/rails-g-not-work/" class="title">rails g not work</a></p>
-                            <p class="item-date"><time datetime="2017-10-23T09:40:14.000Z" itemprop="datePublished">2017-10-23</time></p>
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/11/01/instant-eval与block/" class="title">instant_eval与block</a></p>
+                            <p class="item-date"><time datetime="2017-11-01T06:15:07.000Z" itemprop="datePublished">2017-11-01</time></p>
                         </div>
                     </li>
                 
@@ -365,7 +344,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/">后端</a><span class="category-list-count">2</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ruby/">ruby</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -374,7 +353,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -383,7 +362,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -392,7 +371,7 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/rails/" style="font-size: 20px;">rails</a>
+            <a href="/tags/作用域/" style="font-size: 10px;">作用域</a>
         </div>
     </div>
 
