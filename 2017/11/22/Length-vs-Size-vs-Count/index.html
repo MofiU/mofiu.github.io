@@ -13,7 +13,7 @@
 <meta property="og:site_name">
 <meta property="og:description" content="原文出处： http://batsov.com/articles/2014/02/17/the-elements-of-style-in-ruby-number-13-length-vs-size-vs-count/  对新手而言，在ruby中经常会感受到实现一件事可以有好几种方法的体验。比如说，你可以把一堆数字放入一个集合中，比如 Array, Hash, Set等等，你可以通过#length">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-22T09:50:12.294Z">
+<meta property="og:updated_time" content="2017-11-22T09:53:24.966Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Length vs Size vs Count">
 <meta name="twitter:description" content="原文出处： http://batsov.com/articles/2014/02/17/the-elements-of-style-in-ruby-number-13-length-vs-size-vs-count/  对新手而言，在ruby中经常会感受到实现一件事可以有好几种方法的体验。比如说，你可以把一堆数字放入一个集合中，比如 Array, Hash, Set等等，你可以通过#length">
@@ -232,15 +232,15 @@
 <p>原文出处： <a href="http://batsov.com/articles/2014/02/17/the-elements-of-style-in-ruby-number-13-length-vs-size-vs-count/" target="_blank" rel="external">http://batsov.com/articles/2014/02/17/the-elements-of-style-in-ruby-number-13-length-vs-size-vs-count/</a></p>
 </blockquote>
 <p>对新手而言，在ruby中经常会感受到实现一件事可以有好几种方法的体验。比如说，你可以把一堆数字放入一个集合中，比如 <code>Array</code>, <code>Hash</code>, <code>Set</code>等等，你可以通过<code>#length</code>, <code>#size</code>, <code>#count</code>来获取集合的长度, 其中<code>lenght</code>是<code>size</code>的别名。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"></div><div class="line">arr.length <span class="comment"># =&gt; 3</span></div><div class="line">arr.size <span class="comment"># =&gt; 3</span></div><div class="line">arr.count <span class="comment"># =&gt; 3</span></div><div class="line"></div><div class="line">h = &#123; <span class="symbol">a:</span> <span class="number">1</span>, <span class="symbol">b:</span> <span class="number">2</span> &#125;</div><div class="line"></div><div class="line">h.length <span class="comment"># =&gt; 2</span></div><div class="line">h.size <span class="comment"># =&gt; 2</span></div><div class="line">h.count <span class="comment"># =&gt; 2</span></div><div class="line"></div><div class="line">str = <span class="string">'name'</span></div><div class="line">str.length <span class="comment"># =&gt; 4</span></div><div class="line">str.size <span class="comment"># =&gt; 4</span></div><div class="line"><span class="comment"># str.count won't work as String does not include Enumerable</span></div></pre></td></tr></table></figure></p>
-<p>我们该用哪个方法呢？让我来昂你做出选择</p>
-<p>length不是Enumerable的方法，它是其他具体类的方法，例如String或者Array，它的时间复杂度是O(1)。这个方法的运行速度非常快，使用它准没错。</p>
-<p>是使用length还是size是个个人爱好的问题。在获取集合的大小，比如数组(arrays)和哈希(hashs)的时候我比较喜欢用size方法，字符串(string)的时候则用length，因为我觉得一个哈希或者数组没有长度这个概念，而大小(size)比较形象。类似的，一个字符串有长度概念而没有大小概念。而且，length只是size的别名，最后调用的都是同一个方法，所以用那个没没有那么重要。</p>
-<p>Enumerable#count是完全不同的一个东西，它经常在用的时候搭配一个代码块或者传入一个参数，比如：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">arr = [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span>]</div><div class="line"></div><div class="line">arr.count(&amp;<span class="symbol">:even?</span>) <span class="comment"># =&gt; 3</span></div><div class="line">arr.count(<span class="number">1</span>) <span class="comment"># =&gt; 2</span></div></pre></td></tr></table></figure></p>
+<p>我们该用哪个方法呢？让我来帮你做出选择</p>
+<p><code>length</code>不是<code>Enumerable</code>的方法，它是其他具体类的方法，例如<code>String</code>或者<code>Array</code>，它的时间复杂度是<code>O(1)</code>。这个方法的运行速度非常快，使用它准没错。</p>
+<p>是使用<code>length</code>还是<code>size</code>是个个人爱好的问题。在获取集合的大小，比如数组<code>(arrays)</code>和哈希<code>(hashs)</code>的时候我比较喜欢用<code>size</code>方法，字符串<code>(string)</code>的时候则用length，因为我觉得一个哈希或者数组没有长度这个概念，而大小<code>(size)</code>比较形象。类似的，一个字符串有长度概念而没有大小概念。而且，<code>length</code>只是<code>size</code>的别名，最后调用的都是同一个方法，所以用那个没没有那么重要。</p>
+<p><code>Enumerable#count</code>是完全不同的一个东西，它经常在用的时候搭配一个代码块或者传入一个参数，比如：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">arr = [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span>]</div><div class="line"></div><div class="line">arr.count(&amp;<span class="symbol">:even?</span>) <span class="comment"># =&gt; 3</span></div><div class="line">arr.count(<span class="number">1</span>) <span class="comment"># =&gt; 2</span></div></pre></td></tr></table></figure></p>
 <p>你也可以不带参数，它将会返回数组的大小size<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">arr.count <span class="comment"># =&gt; 7</span></div></pre></td></tr></table></figure></p>
-<p>然而它会带来性能影响，为了计算enumerable 的大小，count方法会来回移动，这不是非常高效的方法，特别是对于元素众多的集合。一些类比如Array实现了count的另一个版本(length)，但是也有很多并没有。</p>
-<p>你应该避免使用count,尽量用length或者size来替换它。</p>
+<p>然而它会带来性能影响，为了计算<code>enumerable</code> 的大小，<code>count</code>方法会来回移动，这不是非常高效的方法，特别是对于元素众多的集合。一些类比如<code>Array</code>实现了<code>count</code>的另一个版本<code>(length)</code>，但是也有很多并没有。</p>
+<p>你应该避免使用<code>count</code>,尽量用<code>length</code>或者<code>size</code>来替换它。</p>
 <blockquote>
-<p>给Rails开发者的忠告：ActiveRecord::Relation的count和size、length是完全不一样的意义。</p>
+<p>给Rails开发者的忠告：<code>ActiveRecord::Relation的count</code>和<code>size</code>、<code>length</code>是完全不一样的意义。</p>
 </blockquote>
 
         
